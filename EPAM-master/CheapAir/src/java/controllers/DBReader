@@ -1,0 +1,95 @@
+package main.java.controllers.resource_controllers;
+
+import main.java.dbconnection.DBConnector;
+import main.java.service.Client;
+import main.java.service.Flight;
+import main.java.service.Ticket;
+
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.sql.*;
+import java.util.ArrayList;
+
+
+public class DBReader {
+    private DBConnector dbConnector;
+    private DBUtils dbUtils;
+    static Logger logger = LogManager.getLogger();
+
+    public DBReader(DBConnector dbConnector) {
+        this.dbConnector = dbConnector;
+        if(!this.dbConnector.isConnected()) {
+            this.dbConnector.connectToDataBase();
+        }
+        this.dbUtils = new DBUtils(this.dbConnector);
+    }
+
+    public DBUtils getDbUtils() {
+        return dbUtils;
+    }
+
+    public ArrayList<Client> getAllClients() {
+        ArrayList<Client> allClients = new ArrayList<Client>();
+        String query = "SELECT * FROM CLIENT";
+        try {
+            ResultSet resultSet = this.dbConnector.getQueryResultAsResultSet(query);
+            while (resultSet.next()) {
+                String username = resultSet.getString("USER_NAME");
+                boolean isAdmin = resultSet.getBoolean("IS_ADMIN");
+
+                allClients.add(new Client(name, isAdmin));
+            }
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+        }
+
+        return allClients;
+    }
+
+    public ArrayList<Flight> getAllFlights() {
+        ArrayList<Flight> allFlights = new ArrayList<Flight>();
+        String query = "SELECT * FROM FLIGHT";
+        try {
+            ResultSet resultSet = this.dbConnector.getQueryResultAsResultSet(query);
+            while (resultSet.next()) {
+                int idFlight = resultSet.getInt("ID_FLIGHT");
+                String fromPlace = resultSet.getString("FROM_PLACE");
+                String toPlace = resultSet.getString("TO_PLACE");
+                String departureTime = resultSet.getString("DEPARTURE_TIME");
+                String arrivalTime = resultSet.getString("ARRIVAL_TIME");
+                int arrivalTime = resultSet.getInt("PASSANGERS_AMOUNT");
+
+                allFlights.add(new Flight(idFlight, fromPlace,toPlace,departureTime,arrivalTime,arrivalTime));
+            }
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+        }
+
+        return allFlights;
+    }
+
+    public ArrayList<Ticket> getAllTickets() {
+        ArrayList<Ticket> allTickets = new ArrayList<Ticket>();
+        String query = "SELECT * FROM TICKET";
+        try {
+            ResultSet resultSet = this.dbConnector.getQueryResultAsResultSet(query);
+            while (resultSet.next()) {
+                int idTicket = resultSet.getInt("ID_TICKET");
+                int idFlight = resultSet.getInt("ID_FLIGHT");
+                int price = resultSet.getInt("PRICE");
+                boolean rightFirstSitting = resultSet.getBoolean("RIGHT_FIRST_SITTING");
+                boolean rightFirstRegistration = resultSet.getBoolean("RIGHT_FIRST_REGISTRATION");
+
+                allTickets.add(new Ticket(idTicket, idFlight, price, rightFirstSitting, rightFirstRegistration));
+            }
+        } catch (SQLException e) {
+            logger.error(e.getMessage());
+        }
+
+        return allTickets;
+    }
+
+
+}

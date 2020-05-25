@@ -1,0 +1,16 @@
+{
+  "clients" : [
+    {
+      "username" : "Admin",
+      "isAdmin" : true
+    },
+    {
+      "username" : "Sergio",
+      "isAdmin" : false
+    },
+    {
+      "username" : "Kevin",
+      "isAdmin" :  false
+    }
+  ]
+}

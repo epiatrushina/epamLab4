@@ -1,0 +1,28 @@
+{
+    "flights" : [
+    {
+      "id": 100,
+      "fromPlace" : "Minsk",
+      "toPlace" : "Moscow",
+      "departureDate" : "28.03.2020, 06:00 PM",
+      "arrivalDate" : "28.03.2020, 08:00 PM",
+      "passengersAmount" : 20
+    },
+    {
+      "id": 200,
+      "fromPlace" : "Dubai",
+      "toPlace" : "Minsk",
+      "departureDate" : "01.04.2020, 11:00 AM",
+      "arrivalDate" : "01.04.2020, 16:00 PM",
+      "passengersAmount" : 70
+    },
+    {
+      "id": 300,
+      "fromPlace" : "Baku",
+      "toPlace" : "Minsk",
+      "departureDate" : "31.05.2020, 10:30 AM",
+      "arrivalDate" : "31.05.2020, 02:30 PM",
+      "passengersAmount" : 50
+    }
+  ]
+}

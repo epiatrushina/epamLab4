@@ -1,0 +1,11 @@
+{
+  "tickets": [
+    {
+      "id" : 4897,
+      "flightId": 200,
+      "price" : 100.10,
+      "rightFirstSitting" : true,
+      "rightFirstRegistration" : false
+    }
+  ]
+}
